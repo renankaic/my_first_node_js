@@ -1,3 +1,9 @@
+let NeDB = require('nedb');
+let db = new NeDB({
+    filename: 'users.db',
+    autoload: true
+})
+
 //Exports the module
 module.exports = (app) => {
 
@@ -20,7 +26,25 @@ module.exports = (app) => {
     //Uses POST
     app.post("/users", (req, res) => {
         
-        res.json(req.body);
+        //res.json(req.body);
+
+        db.insert(req.body, (err, user) => {
+
+            if (err) {
+                
+                console.log(`Erro: ${err}`);
+                res.status(400).json({
+                    error: err
+                });
+
+            } else {
+
+                res.status(200).json(user);
+
+
+            }
+
+        });
 
     });
 
