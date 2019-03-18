@@ -17,13 +17,10 @@ module.exports = (app) => {
     });
 
     //Creates a third route and return
-    app.get("/users/admin", (req, res) => {
+    //Uses POST
+    app.post("/users", (req, res) => {
         
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json; charset=utf-8");
-        res.json({
-            users: []
-        });
+        res.json(req.body);
 
     });
 
