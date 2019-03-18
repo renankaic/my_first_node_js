@@ -1,15 +1,13 @@
 //Require the express package
 const express = require('express');
+const consign = require('consign');
 
-let routesIndex = require('./routes/index.js');
-let routesUsers = require('./routes/users.js');
 
 //Instantiates the Express
 let app = express();
 
-//Tells to the app that he will use the new routes created above
-app.use(routesIndex);
-app.use('/users', routesUsers);
+//Includes all routes from "routes" folder into app
+consign().include('routes').into(app);
 
 //Starts the server
 app.listen(3000, "localhost", () => {
