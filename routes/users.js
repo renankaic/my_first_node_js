@@ -44,7 +44,7 @@ module.exports = (app) => {
 
     });
 
-    //Creates a third route and return
+    //Creates a third route to create a new user
     //Uses POST
     route.post((req, res) => {
         
@@ -82,6 +82,24 @@ module.exports = (app) => {
             } else {
 
                 res.status(200).json(user);
+
+            }
+
+        });
+
+    });
+
+    routeId.put((req, res) => {
+
+        db.update({_id: req.params.id}, req.body, err => {
+
+            if (err) {
+
+                app.utils.error.send(err, req, res);
+
+            } else {
+
+                res.status(200).json(Object.assign(req.params, req.body));
 
             }
 
