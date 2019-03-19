@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use( bodyParser.urlencoded({ extended: false }));
 
 //Includes all routes from "routes" folder into app
-consign().include('routes').into(app);
+consign().include('routes').include('utils').into(app);
 
 //Starts the server
 app.listen(3000, "localhost", () => {

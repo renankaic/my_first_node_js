@@ -7,17 +7,17 @@ let db = new NeDB({
 //Exports the module
 module.exports = (app) => {
 
+    //Sets the initial route path for all requests
+    let route = app.route("/users");
+
     //Creates a second route and return a JSON
-    app.get("/users", (req, res) => {
+    route.get((req, res) => {
 
         db.find({}).sort({name:1}).exec((err, users) => {
 
             if (err){
 
-                console.log( `Erro: ${err}`  );
-                res.status(400).json({
-                    error: err
-                });
+                app.utils.error.send(err, req, res);
 
             } else {
 
@@ -42,13 +42,11 @@ module.exports = (app) => {
             }]
         });*/
 
-
-
     });
 
     //Creates a third route and return
     //Uses POST
-    app.post("/users", (req, res) => {
+    route.post((req, res) => {
         
         //res.json(req.body);
 
@@ -56,10 +54,7 @@ module.exports = (app) => {
 
             if (err) {
                 
-                console.log(`Erro: ${err}`);
-                res.status(400).json({
-                    error: err
-                });
+                app.utils.error.send(err, req, res);
 
             } else {
 

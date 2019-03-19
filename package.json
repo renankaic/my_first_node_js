@@ -13,5 +13,9 @@
     "consign": "^0.1.6",
     "express": "^4.16.4",
     "nedb": "^1.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-google": "^0.12.0"
   }
 }
