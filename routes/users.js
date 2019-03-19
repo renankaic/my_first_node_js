@@ -47,7 +47,13 @@ module.exports = (app) => {
     //Creates a third route to create a new user
     //Uses POST
     route.post((req, res) => {
+
+        let validationResult = app.utils.validator.user(app, req, res);
         
+        if( !validationResult ) {
+            return false;
+        }
+
         //res.json(req.body);
 
         db.insert(req.body, (err, user) => {
@@ -91,6 +97,12 @@ module.exports = (app) => {
 
     //Creates a fifth route to update an user
     routeId.put((req, res) => {
+
+        let validationResult = app.utils.validator.user(app, req, res);
+
+        if (!validationResult) {
+            return false;
+        }
 
         db.update({_id: req.params.id}, req.body, err => {
 
