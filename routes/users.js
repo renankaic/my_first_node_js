@@ -89,6 +89,7 @@ module.exports = (app) => {
 
     });
 
+    //Creates a fifth route to update an user
     routeId.put((req, res) => {
 
         db.update({_id: req.params.id}, req.body, err => {
@@ -107,4 +108,22 @@ module.exports = (app) => {
 
     });
 
+    //Creates a sixth route to delete an user
+    routeId.delete((req, res) => {
+
+        db.remove({ _id: req.params.id}, {}, err => {
+
+            if (err) {
+
+                app.utils.error.send(err, req, res);
+
+            } else {
+
+                res.status(200).json(req.params);
+
+            }
+
+        });
+
+    });
 };
